@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+<body>
+  <script>
+      function login() {
+        fetch('/login', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify({
+            username: document.getElementById('username').value,
+            password: document.getElementById('password').value,
+          })
+        }).then(res => res.json()).then(data => {
+          if (!data.error) {
+            location.href = '/'
+          }
+        })
+      }
+      function logout() {
+        fetch('/logout', {
+          method: 'POST'
+        }).then(res => res.json()).then(data => {
+          if (!data.error) {
+            location.href = '/'
+          }
+        })
+      }
+      function fetchProject() {
+        fetch('/projects').then(res => res.json()).then(data => {
+            console.log(data)
+        })
+      }
+  </script>
+    <section>
+        <label>
+          <span>用户名</span>
+          <input type="text" id="username"/>
+        </label>
+        <label>
+          <span>密码</span>
+          <input type="password"  id="password"/>
+        </label>
+        <button onclick="login()">登陆</button>
+      </section>
+      <button onclick="logout()">注销</button>
+    
+    <button onclick="fetchProject()">获取项目列表</button>
+</body>
+</html>

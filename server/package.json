@@ -1,0 +1,41 @@
+{
+  "name": "server",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "tsc && node dist/server.js",
+    "serve": "nodemon --inspect --watch 'src/**/*' -e ts,tsx --exec 'node -r ts-node/register' ./src/server.ts"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "@types/koa": "^2.0.51",
+    "@types/koa-cors": "0.0.0",
+    "@types/koa-router": "^7.0.42",
+    "@types/mongoose": "^5.5.21",
+    "@types/mongoose-deep-populate": "^2.0.34",
+    "@types/node-uuid": "0.0.28",
+    "@types/pinyin": "^2.8.1",
+    "koa": "^2.10.0",
+    "koa-cors": "0.0.16",
+    "koa-router": "^7.4.0",
+    "moment": "^2.24.0",
+    "mongoose": "^5.7.5",
+    "mongoose-deep-populate": "^3.1.1",
+    "node-uuid": "^1.4.8",
+    "nodemon": "^1.19.4",
+    "pinyin": "^2.9.0",
+    "ts-node": "^8.4.1",
+    "typescript": "^3.6.4"
+  },
+  "dependencies": {
+    "@types/koa-bodyparser": "^4.3.0",
+    "@types/koa-session": "^5.10.1",
+    "@types/koa-static": "^4.0.1",
+    "koa-bodyparser": "^4.2.1",
+    "koa-session": "^5.12.3",
+    "koa-static": "^5.0.0"
+  }
+}
