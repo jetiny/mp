@@ -1,36 +1,46 @@
-import {v0, ContractServiceContext, ActionServiceContext} from 'savml'
+import { v0, ContractServiceContext, ActionServiceContext } from "savml";
 
-export const factory = v0()
-import MyContract from '../com.mp.contract'
+export const factory = v0();
+import MyContract from "../com.mp.contract";
 
-factory.add(new MyContract())
+factory.add(new MyContract());
 
-factory.on('contract.prepare', (ctx: ContractServiceContext) => {
+factory.on("contract.prepare", (ctx: ContractServiceContext) => {
   Object.assign(ctx.routerOptions, {
     prefix: `//localhost:3000`
-  })
+  });
 });
 
-factory.on('action.prepare', ([ctx, service]: [ActionServiceContext, any]) => {
-  ctx.checkRequest = false
-  ctx.checkResponse = false
-  const headers = new Headers({
+let token = "";
+
+export function setToken(userToken: string) {
+  token = userToken;
+}
+
+factory.on("action.prepare", ([ctx, service]: [ActionServiceContext, any]) => {
+  ctx.checkRequest = false;
+  ctx.checkResponse = false;
+  let Authorization = token ? `Bearer ${token}` : "";
+  let headers = new Headers({
     ...ctx.headers,
-  })
-  ctx.fetch = () => fetch(ctx.url, {
-    method: ctx.method,
-    headers,
-    body: JSON.stringify(ctx.requestData)
-  }).then((res) => res.json())
-  .then((res) => {
-    return {
-      json: () => res.data
-    }
-  })
-})
+    Authorization
+  });
+  ctx.fetch = () =>
+    fetch(ctx.url, {
+      method: ctx.method,
+      headers,
+      body: JSON.stringify(ctx.requestData)
+    })
+      .then(res => res.json())
+      .then(res => {
+        return {
+          json: () => res
+        };
+      });
+});
 
 export function install(Vue: any) {
-  return factory.service('com.mp.contract').then((cc) => {
-    Vue.prototype.$api = cc.service()
-  })
+  return factory.service("com.mp.contract").then(cc => {
+    Vue.prototype.$api = cc.service();
+  });
 }

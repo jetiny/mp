@@ -1,4 +1,4 @@
-import {Schema, model, ObjectId, makeEnum} from './mongo'
+import {Schema, model, ObjectId, schemaOption} from './mongo'
 
 export const TaskSchema = new Schema({
   // 标题
@@ -12,33 +12,39 @@ export const TaskSchema = new Schema({
   realStartDate : { type: Date, default: Date.now },
   realEndDate : { type: Date, default: Date.now },
   // 负责人
-  bindUser : { type: ObjectId, ref: 'User' },
-  bindAt : { type: Date, default: Date.now },
+  assignUser : { type: ObjectId, ref: 'User' },
+  assignAt : { type: Date, default: Date.now },
   // 关联团队
   team : { type: ObjectId, ref: 'Team' },
   // 关联产品
   product : { type: ObjectId, ref: 'Product' },
   // 关联迭代/项目
-  project : { type: ObjectId, ref: 'Project' },
+  iteration : { type: ObjectId, ref: 'Iteration' },
+  // 关联阶段
+  iterationStage : { type: ObjectId, ref: 'IterationStage' },
+  // 预估小时
+  estimateHours: { type: Number, default: Number },
 
   status: { type: Number, default: Number },
   // 任务状态
   taskStatus: { type: Number, default: Number },
 
   // 子任务
-  deps : { type: ObjectId, ref: 'Task' },
+  deps : [{ type: ObjectId, ref: 'Task' }],
+  childs : [{ type: ObjectId, ref: 'Task' }],
 
   createdBy : { type: ObjectId, ref: 'User' },
   updatedBy : { type: ObjectId, ref: 'User' },
   createdAt : { type: Date, default: Date.now },
   updatedAt : { type: Date, default: Date.now },
-})
+}, schemaOption() )
 
-makeEnum(TaskSchema, 'taskStatus', 'taskStatusEnum', [
-  'unset', // 未设置, backlog中
-  'todo',  // 预备处理
-  'doing', // 处理中
-  'done'   // 已结束
-])
+export enum TaskStatus {
+  None,
+  Backlog,
+  Todo,
+  Doing,
+  Done,
+}
 
 export const TaskModel = model('Task', TaskSchema)

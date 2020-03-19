@@ -1,5 +1,5 @@
-import Vue, { VNode } from 'vue'
-import { ServicesHandler } from './com.mp.contract';
+import Vue, { VNode } from "vue";
+import { ServicesHandler } from "./com.mp.contract";
 
 declare global {
   namespace JSX {
@@ -8,13 +8,17 @@ declare global {
     // tslint:disable no-empty-interface
     interface ElementClass extends Vue {}
     interface IntrinsicElements {
-      [elem: string]: any
+      [elem: string]: any;
     }
   }
 }
 
-declare module 'vue/types/vue' {
+declare module "vue/types/vue" {
   interface Vue {
-    $api: ServicesHandler,
+    $api: ServicesHandler;
+    $Message: any;
+    $Confirm: any;
+    valid: any;
+    // $refs: any,
   }
 }

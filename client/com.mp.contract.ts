@@ -10,22 +10,17 @@ export default class MContract implements Contract {
     ]},
     {name: 'Team', views: [
       {name: 'AddTeam'},
-      {name: 'EditTeam'},
       {name: 'ListTeam'},
     ]},
     {name: 'Product', views: [
-      {name: 'AddProduct'},
       {name: 'EditProduct'},
       {name: 'ListProduct'},
     ]},
-    {name: 'Project', views: [
-      {name: 'AddProject'},
-      {name: 'EditProject'},
-      {name: 'ListProject'},
+    {name: 'Iteration', views: [
+      {name: 'ListIteration'},
     ]},
     {name: 'Task', views: [
-      {name: 'AddTask'},
-      {name: 'EditTask'},
+      {name: 'ListTask'},
     ]},
   ]
   services = [
@@ -39,9 +34,84 @@ export default class MContract implements Contract {
               {name: 'username', type: String},
               {name: 'password', type: String},
             ]
+          },
+          response: {
+            fields: {
+              id: String,
+              name: String,
+              nick: String,
+              token: String,
+              ts: Number,
+              expirs: Number,
+              lts: {
+                type: Number,
+                title: '本机时间',
+                optional: true
+              }
+            }
           }
-        }
+        },
+        {name: 'SearchUser'}
       ]
-    }
+    },
+    {
+      name: 'Team',
+      actions: [
+        {name: 'ListTeam'},
+        {name: 'ListUserTeams'},
+        {name: 'CreateTeam'},
+        {name: 'UpdateTeam'},
+        {name: 'ListTeamUsers'},
+        {name: 'AddTeamUser'},
+        {name: 'DeleteTeam'},
+        {name: 'ChangeTeamUserRole'},
+        {name: 'CreateProduct'},
+        {name: 'ListTeamProducts'},
+      ]
+    },
+    {
+      name: 'Product',
+      actions: [
+        {name: 'UpdateProduct'},
+        {name: 'DeleteProduct'},
+        {name: 'GetUserProducts'},
+        {name: 'ListTeamsProducts'},
+        {name: 'GetUserTeamProducts'},
+        {name: 'ListProductUsers'},
+        {name: 'AddProductUser'},
+        {name: 'CreateIteration'},
+        {name: 'ChangeProductUserRole'},
+        {name: 'GetProductUserList'},
+      ]
+    },
+    {
+      name: 'Iteration',
+      actions: [
+        {name: 'UpdateIteration'},
+        {name: 'DeleteIteration'},
+        {name: 'StartIteration'},
+        {name: 'StopIteration'},
+        {name: 'ListProductIterations'},
+        {name: 'UpdateIterationStages'},
+      ]
+    },
+    {
+      name: 'Stage',
+      actions: [
+        {name: 'ListStages'},
+        {name: 'ListIterationsStages'},
+      ]
+    },
+    {
+      name: 'Task',
+      actions: [
+        {name: 'ListTasks'},
+        {name: 'CreateTask'},
+        {name: 'UpdateTask'},
+        {name: 'StartTask'},
+        {name: 'StopTask'},
+        {name: 'DeleteTask'},
+      ]
+    },
   ]
 }

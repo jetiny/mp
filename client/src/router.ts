@@ -2,19 +2,14 @@ const Account = () => import(/* webpackChunkName: "Account" */ './views/Account/
 const AccountLogin = () => import(/* webpackChunkName: "Account" */ './views/Account/AccountLogin.vue');
 const Team = () => import(/* webpackChunkName: "Team" */ './views/Team/Team.vue');
 const TeamAddTeam = () => import(/* webpackChunkName: "Team" */ './views/Team/TeamAddTeam.vue');
-const TeamEditTeam = () => import(/* webpackChunkName: "Team" */ './views/Team/TeamEditTeam.vue');
 const TeamListTeam = () => import(/* webpackChunkName: "Team" */ './views/Team/TeamListTeam.vue');
 const Product = () => import(/* webpackChunkName: "Product" */ './views/Product/Product.vue');
-const ProductAddProduct = () => import(/* webpackChunkName: "Product" */ './views/Product/ProductAddProduct.vue');
 const ProductEditProduct = () => import(/* webpackChunkName: "Product" */ './views/Product/ProductEditProduct.vue');
 const ProductListProduct = () => import(/* webpackChunkName: "Product" */ './views/Product/ProductListProduct.vue');
-const Project = () => import(/* webpackChunkName: "Project" */ './views/Project/Project.vue');
-const ProjectAddProject = () => import(/* webpackChunkName: "Project" */ './views/Project/ProjectAddProject.vue');
-const ProjectEditProject = () => import(/* webpackChunkName: "Project" */ './views/Project/ProjectEditProject.vue');
-const ProjectListProject = () => import(/* webpackChunkName: "Project" */ './views/Project/ProjectListProject.vue');
+const Iteration = () => import(/* webpackChunkName: "Iteration" */ './views/Iteration/Iteration.vue');
+const IterationListIteration = () => import(/* webpackChunkName: "Iteration" */ './views/Iteration/IterationListIteration.vue');
 const Task = () => import(/* webpackChunkName: "Task" */ './views/Task/Task.vue');
-const TaskAddTask = () => import(/* webpackChunkName: "Task" */ './views/Task/TaskAddTask.vue');
-const TaskEditTask = () => import(/* webpackChunkName: "Task" */ './views/Task/TaskEditTask.vue');
+const TaskListTask = () => import(/* webpackChunkName: "Task" */ './views/Task/TaskListTask.vue');
 
 export default [
   {
@@ -44,12 +39,6 @@ export default [
         meta: {},
       },
       {
-        name: 'TeamEditTeam',
-        component: TeamEditTeam,
-        path: 'editTeam',
-        meta: {},
-      },
-      {
         name: 'TeamListTeam',
         component: TeamListTeam,
         path: 'listTeam',
@@ -63,12 +52,6 @@ export default [
     path: '/product',
     meta: {},
     children: [
-      {
-        name: 'ProductAddProduct',
-        component: ProductAddProduct,
-        path: 'addProduct',
-        meta: {},
-      },
       {
         name: 'ProductEditProduct',
         component: ProductEditProduct,
@@ -84,27 +67,15 @@ export default [
     ],
   },
   {
-    name: 'Project',
-    component: Project,
-    path: '/project',
+    name: 'Iteration',
+    component: Iteration,
+    path: '/iteration',
     meta: {},
     children: [
       {
-        name: 'ProjectAddProject',
-        component: ProjectAddProject,
-        path: 'addProject',
-        meta: {},
-      },
-      {
-        name: 'ProjectEditProject',
-        component: ProjectEditProject,
-        path: 'editProject',
-        meta: {},
-      },
-      {
-        name: 'ProjectListProject',
-        component: ProjectListProject,
-        path: 'listProject',
+        name: 'IterationListIteration',
+        component: IterationListIteration,
+        path: 'listIteration',
         meta: {},
       },
     ],
@@ -116,15 +87,9 @@ export default [
     meta: {},
     children: [
       {
-        name: 'TaskAddTask',
-        component: TaskAddTask,
-        path: 'addTask',
-        meta: {},
-      },
-      {
-        name: 'TaskEditTask',
-        component: TaskEditTask,
-        path: 'editTask',
+        name: 'TaskListTask',
+        component: TaskListTask,
+        path: 'listTask',
         meta: {},
       },
     ],

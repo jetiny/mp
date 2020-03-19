@@ -1,11 +1,4 @@
-import * as Router from 'koa-router';
+import config from './config'
+import * as jwt from 'koa-jwt'
 
-export const auth = async (ctx , next) => {
-  if (ctx.session.uid) {
-    await next()
-  } else {
-    ctx.body = {
-      error: 403
-    }
-  }
-}
+export const auth = jwt({secret: config.JWT_SECRET})

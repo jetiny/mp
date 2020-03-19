@@ -50,11 +50,31 @@ export async function updateTeamStatus (input: {
   let id = isObjectId(input.id) || createId(input.id as string)
   return TeamModel.findOneAndUpdate({
     _id: id
-  }, {
+  }, {$set: {
     status: input.status,
     updatedBy: isObjectId(input.userId) || createId(input.userId as string),
     updatedAt: new Date(),
-  }).exec()
+  }}, {new : true}).exec()
+}
+
+/**
+ * 更新Team状态值
+ */
+export async function updateTeam (input: {
+  id: string | ObjectID,
+  userId: string | ObjectID,
+  title: string,
+  description: string,
+}) {
+  let id = isObjectId(input.id) || createId(input.id as string)
+  return TeamModel.findOneAndUpdate({
+    _id: id
+  }, {$set: {
+    title: input.title,
+    description: input.description,
+    updatedBy: isObjectId(input.userId) || createId(input.userId as string),
+    updatedAt: new Date(),
+  }}, {new : true}).exec()
 }
 
 /**
@@ -133,9 +153,41 @@ export async function updateTeamUserRole (input: {
 export async function getUserTeams(input: {
   user: string | ObjectID,
 }) {
-  return TeamUserModel.findAll({
-    role: ['$neq', TeamUserRole.Leaved],
+  let res = await TeamUserModel.find({
+    role: {
+      $ne: TeamUserRole.Leaved
+    },
     status: 0,
     user: isObjectId(input.user) || createId(input.user as string),
+  }).populate([
+    {path: 'team'},
+  ]).exec()
+  return res.filter(it => it.team.status === 0)
+}
+
+/**
+ * 获取Team的用户
+ */
+export async function getTeamUsers(input: {
+  team: string | ObjectID
+}) {
+  return TeamUserModel.find({
+    team: isObjectId(input.team) || createId(input.team as string),
+  }).populate([
+    {path: 'user', select : 'name nick id'},
+  ]).exec()
+}
+
+/**
+ * 获取用户在Team中的角色
+ */
+export async function getUserTeamRole(input: {
+  team: string | ObjectID,
+  user: string | ObjectID,
+}) {
+  return TeamUserModel.findOne({
+    status: 0,
+    user: isObjectId(input.user) || createId(input.user as string),
+    team: isObjectId(input.team) || createId(input.team as string),
   }).exec()
 }

@@ -18,9 +18,6 @@ export default {
           name: 'AddTeam',
         },
         {
-          name: 'EditTeam',
-        },
-        {
           name: 'ListTeam',
         },
       ],
@@ -28,9 +25,6 @@ export default {
     {
       name: 'Product',
       views: [
-        {
-          name: 'AddProduct',
-        },
         {
           name: 'EditProduct',
         },
@@ -40,16 +34,10 @@ export default {
       ],
     },
     {
-      name: 'Project',
+      name: 'Iteration',
       views: [
         {
-          name: 'AddProject',
-        },
-        {
-          name: 'EditProject',
-        },
-        {
-          name: 'ListProject',
+          name: 'ListIteration',
         },
       ],
     },
@@ -57,10 +45,7 @@ export default {
       name: 'Task',
       views: [
         {
-          name: 'AddTask',
-        },
-        {
-          name: 'EditTask',
+          name: 'ListTask',
         },
       ],
     },
@@ -72,6 +57,137 @@ export default {
         {
           name: 'Login',
           request: 'UserLoginRequest',
+          response: 'UserLoginResponse',
+        },
+        {
+          name: 'SearchUser',
+        },
+      ],
+    },
+    {
+      name: 'Team',
+      actions: [
+        {
+          name: 'ListTeam',
+        },
+        {
+          name: 'ListUserTeams',
+        },
+        {
+          name: 'CreateTeam',
+        },
+        {
+          name: 'UpdateTeam',
+        },
+        {
+          name: 'ListTeamUsers',
+        },
+        {
+          name: 'AddTeamUser',
+        },
+        {
+          name: 'DeleteTeam',
+        },
+        {
+          name: 'ChangeTeamUserRole',
+        },
+        {
+          name: 'CreateProduct',
+        },
+        {
+          name: 'ListTeamProducts',
+        },
+      ],
+    },
+    {
+      name: 'Product',
+      actions: [
+        {
+          name: 'UpdateProduct',
+        },
+        {
+          name: 'DeleteProduct',
+        },
+        {
+          name: 'GetUserProducts',
+        },
+        {
+          name: 'ListTeamsProducts',
+        },
+        {
+          name: 'GetUserTeamProducts',
+        },
+        {
+          name: 'ListProductUsers',
+        },
+        {
+          name: 'AddProductUser',
+        },
+        {
+          name: 'CreateIteration',
+        },
+        {
+          name: 'ChangeProductUserRole',
+        },
+        {
+          name: 'GetProductUserList',
+        },
+      ],
+    },
+    {
+      name: 'Iteration',
+      actions: [
+        {
+          name: 'UpdateIteration',
+        },
+        {
+          name: 'DeleteIteration',
+        },
+        {
+          name: 'StartIteration',
+        },
+        {
+          name: 'StopIteration',
+        },
+        {
+          name: 'ListProductIterations',
+        },
+        {
+          name: 'UpdateIterationStages',
+        },
+      ],
+    },
+    {
+      name: 'Stage',
+      actions: [
+        {
+          name: 'ListStages',
+        },
+        {
+          name: 'ListIterationsStages',
+        },
+      ],
+    },
+    {
+      name: 'Task',
+      actions: [
+        {
+          name: 'ListTasks',
+        },
+        {
+          name: 'CreateTask',
+        },
+        {
+          name: 'UpdateTask',
+        },
+        {
+          name: 'StartTask',
+        },
+        {
+          name: 'StopTask',
+        },
+        {
+          name: 'DeleteTask',
         },
       ],
     },
@@ -90,6 +206,41 @@ export default {
         },
       ],
       name: 'UserLoginRequest',
+    },
+    {
+      fields: [
+        {
+          type: 'String',
+          name: 'id',
+        },
+        {
+          type: 'String',
+          name: 'name',
+        },
+        {
+          type: 'String',
+          name: 'nick',
+        },
+        {
+          type: 'String',
+          name: 'token',
+        },
+        {
+          type: 'Number',
+          name: 'ts',
+        },
+        {
+          type: 'Number',
+          name: 'expirs',
+        },
+        {
+          type: 'Number',
+          title: '本机时间',
+          optional: true,
+          name: 'lts',
+        },
+      ],
+      name: 'UserLoginResponse',
     },
   ],
   validators: [],

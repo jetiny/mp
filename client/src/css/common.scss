@@ -1,0 +1,66 @@
+.iteration-tree-container {
+  display: flex;
+  flex-direction: row;
+  .h-tree {
+    min-width: 200px;
+    margin: 0 5px;
+  }
+  .h-tree-show-desc {
+    font-size: 17px;
+    padding: 3px 20px;
+    border-radius: 0 !important;
+    color: #444;
+  }
+  .h-tree-show {
+    border-right: 4px solid transparent !important;
+    &:hover {
+      .tree-edit-part {
+        opacity: 1;
+      }
+    }
+    .h-tree-show-expand {
+      color: black;
+    }
+    &:hover {
+      background-color: #e5f5ed !important;
+      color: #47ba86 !important;
+    }
+    .h-tree-show-desc {
+        background-color: transparent !important;
+        &:hover {
+          color: #47ba86 !important;
+          background-color: transparent !important;
+        }
+      }
+    &.h-tree-show-selected{
+      background-color: #e5f5ed !important;
+      color: #45b984 !important;
+      border-right: 4px solid #45b984 !important;
+      .h-tree-show-desc {
+        background-color: transparent !important;
+        color: #47ba86 !important;
+        &:hover {
+          background-color: transparent !important;
+        }
+      }
+    }
+  }
+  .iteracion-display {
+    flex: 1;
+  }
+  .tree-edit-part {
+    position: absolute;
+    right: 5px;
+    top: 2px;
+    opacity: 0;
+    i {
+      font-size: 12px;
+      vertical-align: middle;
+      margin-right: 10px;
+      cursor: pointer;
+      &:hover {
+        color:  #47ba86;
+      }
+    }
+  }
+}

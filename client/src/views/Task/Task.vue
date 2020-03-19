@@ -1,13 +1,12 @@
 <template>
-<div class="page-task">
-  <router-view class="view-container"></router-view>
-</div>
+  <div class="page-task">
+    <router-view class="view-container"></router-view>
+  </div>
 </template>
 <script lang="ts">
-import { Component, Vue } from 'vue-property-decorator'
+import { Component, Vue } from "vue-property-decorator";
 @Component({
-  name: 'Task'
+  name: "Task"
 })
-export default class Task extends Vue {
-}
+export default class Task extends Vue {}
 </script>

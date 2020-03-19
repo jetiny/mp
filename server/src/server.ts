@@ -1,12 +1,14 @@
 import * as Koa from 'koa';
 import * as Router from 'koa-router';
 import * as bodyParser from 'koa-bodyparser'
-import * as session from 'koa-session'
 import * as serve from 'koa-static'
 import * as cors from 'koa-cors'
-import installProject from './controllers/project'
+import installIteration from './controllers/iteration'
+import installProduct from './controllers/product'
 import installTask from './controllers/task'
 import installUser from './controllers/user'
+import installTeam from './controllers/team'
+import installStage from './controllers/stage'
 import './declare'
 import {connect} from './models/mongo'
 import config from './config'
@@ -14,30 +16,40 @@ import mock from './mock'
 
 const app = new Koa();
 
+// Custom 401 handling if you don't want to expose koa-jwt errors to users
+app.use(function(ctx, next){
+  return next().catch((err) => {
+    if (401 == err.status) {
+      ctx.status = 401;
+      ctx.body = {
+        error: 401,
+        message: 'Protected resource, use Authorization header to get access\n'
+      };
+    } else {
+      throw err;
+    }
+  });
+});
+
 app.use(cors());
 app.use(bodyParser());
 
-app.keys = ['some secret hurr'];
-app.use(session({
-  key: 'koa:sess',   //cookie key (default is koa:sess)
-  maxAge: 86400000,  // cookie的过期时间 maxAge in ms (default is 1 days)
-  overwrite: true,  //是否可以overwrite    (默认default true)
-  httpOnly: true, //cookie是否只有服务器端可以访问 httpOnly or not (default true)
-  signed: true,   //签名默认true
-  rolling: false,  //在每次请求时强行设置cookie，这将重置cookie过期时间（默认：false）
-  renew: false,  //(boolean) renew session when session is nearly expired,
-}, app));
-
 const router = new Router();
 
-router.get('/test', async (ctx) => {
+router.get('/flutter', async (ctx) => {
   console.log(ctx.request.body)
-  ctx.body = 'Hello World!';
+  ctx.body = {
+    name: 'flutter',
+    age: 10,
+  };
 });
 
-installProject(router);
+installIteration(router);
+installProduct(router);
 installTask(router);
 installUser(router);
+installTeam(router);
+installStage(router);
 
 app.use(router.routes());
 app.use(serve(__dirname + '/../www'));
